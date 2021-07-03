@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
-
 import { useQuery } from "@apollo/client";
-import "./App.css";
 import "twin.macro";
-import { Container, BigHeading } from "./styles";
-import { DATA_QUERY } from "./graphql";
-import Posts from "./Posts";
-import Header from "./Header";
+
+import { Container, BigHeading, CardContainer } from "./components/styles";
+import { DATA_QUERY } from "./components/graphql";
+import Posts from "./components/Posts";
+import Header from "./components/Header";
 
 function App() {
   const { loading, error, data } = useQuery(DATA_QUERY);
@@ -23,12 +22,12 @@ function App() {
       <Container>
         <BigHeading>Posts</BigHeading>
       </Container>
-      <div tw="flex gap-10 w-full justify-center mr-8 p-6">
+      <CardContainer>
         {data.containerCollection.items &&
           data.containerCollection.items.map((post, i) => (
             <Posts post={post} key={i} />
           ))}
-      </div>
+      </CardContainer>
     </div>
   );
 }
