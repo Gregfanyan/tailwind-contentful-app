@@ -1,5 +1,5 @@
-//import React, { useEffect, useState } from "react";
-//import { client } from "./Client";
+/** @jsxImportSource @emotion/react */
+
 import { useQuery } from "@apollo/client";
 import "./App.css";
 import "twin.macro";
@@ -9,17 +9,7 @@ import Posts from "./Posts";
 import Header from "./Header";
 
 function App() {
-  //const [posts, setPosts] = useState();
   const { loading, error, data } = useQuery(DATA_QUERY);
-
-  //fetching rest api
-
-  // useEffect(() => {
-  //   client
-  //     .getEntries()
-  //     .then((res) => setPosts(res.items))
-  //     .catch((err) => console.log(err));
-  // }, []);
 
   if (loading) return <p>Loading...</p>;
   if (error) {
@@ -33,23 +23,12 @@ function App() {
       <Container>
         <BigHeading>Posts</BigHeading>
       </Container>
-      {/* 
-      {posts &&
-        posts.map((post) => (
-          <div key={post.fields.slug}>
-            <div>{post.fields.slug}</div>
-            <img
-              src={post.fields.image.map((img) => img.fields.file.url)}
-              alt="post"
-            />
-            <div>{post.fields.titlte}</div>
-          </div>
-        ))} */}
-
-      {data.containerCollection.items &&
-        data.containerCollection.items.map((post, i) => (
-          <Posts post={post} key={i} />
-        ))}
+      <div tw="flex gap-10 w-full justify-center mr-8 p-6">
+        {data.containerCollection.items &&
+          data.containerCollection.items.map((post, i) => (
+            <Posts post={post} key={i} />
+          ))}
+      </div>
     </div>
   );
 }
